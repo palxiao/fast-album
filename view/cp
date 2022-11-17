@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-target="../www/"
+target="../docs/"
 set -e
 
 rm -rf ${target}*

@@ -3,7 +3,7 @@
  * @Date: 2022-11-11 21:11:42
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-17 10:17:42
+ * @LastEditTime: 2022-11-17 11:11:29
  * @site: book.palxp.com
  */
 const fs = require('fs')
@@ -16,7 +16,7 @@ const ColorThief = require('colorthief')
 
 const basePath = path.resolve('resources')
 const jsonPath = path.resolve('view/src/assets/data/datalist.json')
-const thumbSize = 340 // 缩略图质量
+const thumbSize = 600 // 缩略图质量
 const isPrivacy = false // 是否开启隐私模式，检测到敏感信息会抹除，缺点是处理过程会变慢
 const picsData = []
 
