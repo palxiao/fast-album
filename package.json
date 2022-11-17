@@ -6,7 +6,7 @@
   "scripts": {
     "pre": "pnpm install && cd view && pnpm install",
     "build": "node index.js && cd view && npm run build && cd ..",
-    "deploy": "git add . && git commit -m 'build' && git push",
+    "deploy": "git add . && git commit -m 'build' && git push origin main",
     "start": "npm run build && npm run deploy"
   },
   "repository": {
