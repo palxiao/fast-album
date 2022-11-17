@@ -1,0 +1,30 @@
+{
+  "name": "fast-photo-album",
+  "version": "1.0.0",
+  "description": "easy fast to create a free online gallery",
+  "main": "index.js",
+  "scripts": {
+    "pre": "pnpm install && cd view && pnpm install",
+    "build": "node index.js && cd view && npm run build && cd ..",
+    "deploy": "git add . && git commit -m 'build' && git push",
+    "start": "npm run build && npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:palxiao/fast-album.git"
+  },
+  "keywords": [
+    "photo",
+    "album",
+    "gallery"
+  ],
+  "author": "ShawnPhang",
+  "license": "ISC",
+  "dependencies": {
+    "colorthief": "^2.3.2",
+    "dayjs": "^1.11.6",
+    "exif": "^0.6.0",
+    "image-size": "^1.0.2",
+    "images": "3.2.3"
+  }
+}

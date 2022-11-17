@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+target="../www/"
+set -e
+
+rm -rf ${target}*
+mv -f dist/* ${target}
+
+echo -e "\n成功\n"
+exit
