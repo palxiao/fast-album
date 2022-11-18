@@ -3,7 +3,7 @@
  * @Date: 2022-10-11 17:29:58
  * @Description: 遮罩弹窗
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-10-17 18:16:03
+ * @LastEditTime: 2022-11-18 18:37:37
  * @site: book.palxp.com
 -->
 <template>
@@ -57,7 +57,7 @@ export default defineComponent({
 .modal {
   touch-action: none;
   position: fixed;
-  z-index: 99;
+  z-index: 9999;
   top: 0;
   left: 0;
   width: 100vw;

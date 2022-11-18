@@ -26,7 +26,7 @@ export default defineComponent({
       listEl: null,
       list: [],
       listHeight: 0,
-      type: 0,
+      type: 1,
     })
 
     onMounted(() => {
@@ -108,11 +108,11 @@ export default defineComponent({
   position: fixed;
   right: 4px;
   top: 4px;
-  z-index: 99;
+  z-index: 9999;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 13px;
   background: rgba(0, 0, 0, 0.6);
-  padding: 6px 10px;
-  border-radius: 12px;
+  padding: 7px 12px;
+  border-radius: 15px;
 }
 </style>

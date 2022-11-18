@@ -3,15 +3,28 @@
  * @Date: 2022-11-13 17:34:04
  * @Description: 书架流排版
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-13 17:45:51
+ * @LastEditTime: 2022-11-18 21:25:59
  * @site: book.palxp.com
  */
 const gap = 8 // 图片之间的间隔
+let limitWidth = 0 // 宽度限制
 
 export default async (state: any, data: any) => {
-  let { offsetWidth: limitWidth } = state.listEl.parentNode
-  const list = JSON.parse(JSON.stringify(data))
+  limitWidth = state.listEl.parentNode.offsetWidth
+  let neatArr: any = []
 
+  const list = JSON.parse(JSON.stringify(data))
+  neatArr = await createNewArr(list)
+
+  state.list.length <= 0 && (state.list = neatArr.flat())
+  for (let i = 0; i < state.list.length; i++) {
+    state.list[i].w = neatArr.flat()[i].w
+    state.list[i].h = neatArr.flat()[i].h
+    state.list[i].m = neatArr.flat()[i].m
+  }
+}
+
+async function createNewArr(list: any) {
   const standardHeight = 180 // 高度阈值
   const neatArr: any = [] // 整理后的数组
   function factory(cutArr: any) {
@@ -55,12 +68,8 @@ export default async (state: any, data: any) => {
       await handleList()
     }
   }
+
   await handleList()
 
-  state.list.length <= 0 && (state.list = neatArr.flat())
-  for (let i = 0; i < state.list.length; i++) {
-    state.list[i].w = neatArr.flat()[i].w
-    state.list[i].h = neatArr.flat()[i].h
-    state.list[i].m = neatArr.flat()[i].m
-  }
+  return neatArr
 }
