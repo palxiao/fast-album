@@ -3,7 +3,7 @@
  * @Date: 2022-11-18 18:09:51
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-18 18:56:12
+ * @LastEditTime: 2022-11-18 23:44:18
  * @site: book.palxp.com
 -->
 <template>
@@ -31,7 +31,7 @@ export default defineComponent({
       })
 
       setTimeout(async () => {
-        await load()
+        // await load()
         const APlayer = (window as any).APlayer
         new APlayer({
           container: document.getElementById('aplayer'),
@@ -42,10 +42,10 @@ export default defineComponent({
       }, 300)
     })
 
-    async function load() {
-      await import('./lib/APlayer.min.css')
-      await import('./lib/APlayer.min.js')
-    }
+    // async function load() {
+    //   await import('./lib/APlayer.min.css')
+    //   await import('./lib/APlayer.min.js')
+    // }
   },
 })
 </script>
