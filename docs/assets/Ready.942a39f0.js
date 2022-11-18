@@ -1,0 +1,1 @@
+import{_ as s,d as t,r as n,o as r,c as a,a as c,g as p}from"./index.ecac7d90.js";const _=t({setup(){c(()=>{const{proxy:e}=p();console.log("is ios ? :",e.$utils.isIOS())})}});function i(e,u,d,f,l,m){const o=n("router-view");return r(),a(o)}var v=s(_,[["render",i]]);export{v as default};
