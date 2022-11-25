@@ -6,5 +6,5 @@ set -e
 rm -rf ${target}*
 mv -f dist/* ${target}
 
-echo -e "\n成功\n"
+echo -e "\n项目已经生成...等待部署...\n"
 exit
