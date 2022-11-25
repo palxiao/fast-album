@@ -1,6 +1,7 @@
 
 <template>
   <div class="list" ref="listEl" :style="{ height: type === 0 ? listHeight + 'px' : '' }">
+    <div class="datetime">{{currentDate}}</div>
     <div @click="changeType" class="button">切换样式</div>
     <div class="img-box" :style="{ position: type === 0 ? 'absolute' : '', width: `${img.w}px`, height: `${img.h}px`, margin: img.m, left: `${img.left}px`, top: `${img.top}px` }" v-for="(img, i) in list" :index="i" :key="'img' + i">
       <my-image @click="change($event, img)" :src="img.show" :data="img" />
@@ -22,15 +23,24 @@ export default defineComponent({
     },
   },
   setup(props, context) {
-    const state = reactive({
+    const state: any = reactive({
       listEl: null,
       list: [],
       listHeight: 0,
       type: 1,
+      currentDate: ''
     })
+    // state.dateStr = computed(() => )
 
-    onMounted(() => {
-      changeList(props.data)
+    onMounted(async () => {
+      await nextTick()
+      await changeList(props.data)
+      state.currentDate = state.list[0].dateStr
+      document.body.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const index = state.list.findIndex(x => x.top >= scrollTop)
+        state.currentDate = state.list[index].dateStr
+      })
     })
     watch(props.data, async (newList) => {
       changeList(newList)
@@ -55,7 +65,7 @@ export default defineComponent({
     }
 
     const change = (e, imgData) => {
-      context.emit('change', {e, imgData})
+      context.emit('change', { e, imgData })
     }
 
     const changeType = () => {
@@ -114,5 +124,19 @@ export default defineComponent({
   background: rgba(0, 0, 0, 0.6);
   padding: 7px 12px;
   border-radius: 15px;
+}
+.datetime {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  width: 100vw;
+  height: 56px;
+  color: #ffffff;
+  padding: 8px 10px;
+  font-size: 17px;
+  letter-spacing: 1px;
 }
 </style>

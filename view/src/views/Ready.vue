@@ -7,9 +7,8 @@ import { onMounted, getCurrentInstance, defineComponent } from "vue";
 export default defineComponent({
   setup() {
     onMounted(() => {
-      const { proxy } = getCurrentInstance();
+      // const { proxy } = getCurrentInstance();
       // console.log(internalInstance.appContext.config.globalProperties);
-      console.log("is ios ? :", proxy.$utils.isIOS());
     });
   },
 });

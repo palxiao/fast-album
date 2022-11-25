@@ -3,7 +3,7 @@
  * @Date: 2022-11-18 18:09:51
  * @Description:  
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-18 23:44:18
+ * @LastEditTime: 2022-11-25 02:59:37
  * @site: book.palxp.com
 -->
 <template>
@@ -11,8 +11,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, nextTick } from 'vue'
 import * as api from './api'
+import loader from '@/utils/widgets/deferLoader'
 
 export default defineComponent({
   setup() {
@@ -29,9 +30,9 @@ export default defineComponent({
       audio = audio.data.map((x: any) => {
         return Object.assign({ url: x.url }, listObj[x.id])
       })
-
+      await load()
       setTimeout(async () => {
-        // await load()
+        await nextTick()
         const APlayer = (window as any).APlayer
         new APlayer({
           container: document.getElementById('aplayer'),
@@ -42,10 +43,17 @@ export default defineComponent({
       }, 300)
     })
 
-    // async function load() {
-    //   await import('./lib/APlayer.min.css')
-    //   await import('./lib/APlayer.min.js')
-    // }
+    async function load() {
+      await loader('script', 'https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js')
+      await loader('link', 'https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css')
+    }
   },
 })
 </script>
+
+<style>
+.aplayer.aplayer-fixed .aplayer-body {
+  bottom: calc(constant(safe-area-inset-bottom));
+  bottom: calc(env(safe-area-inset-bottom));
+}
+</style>

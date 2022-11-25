@@ -1,6 +1,6 @@
 // import store from '../store'
 // import * as services from '../api/index'
-import * as utils from './utils'
+// import * as utils from './utils'
 /** 全局组件 */
 // import modules from './widget/modules'
 // modules(Vue)
@@ -14,7 +14,7 @@ export default {
         
         // myVue.config.globalProperties.$ajax = services
         
-        myVue.config.globalProperties.$utils = utils
+        // myVue.config.globalProperties.$utils = utils
         
         // myVue.config.globalProperties.$bus = 
         

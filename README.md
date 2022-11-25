@@ -3,7 +3,7 @@
  * @Date: 2022-10-11 15:27:28
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-17 10:37:18
+ * @LastEditTime: 2022-11-25 02:38:25
  * @site: book.palxp.com
 -->
 
@@ -15,10 +15,21 @@
 
 # 开始
 
-1. fork项目，克隆本地，运行 `npm run pre`
-2. 将照片（带元数据）放至 `resource` 目录中
-3. 运行 `npm run start` 生成项目，提交代码到仓库中
-4. 配置 Pages 即可
+1. fork项目，克隆本地，运行 `npm run pre`安装依赖
+2. 将照片（原始图像）放至 `resource` 目录中
+3. 修改`config.json`配置，运行 `npm run start` 生成项目，git提交
+4. 配置好 Pages 即可
+
+# 配置说明
+
+```
+{
+  "thumbSize": 500, // 缩略图的目标分辨率宽度，越大越清晰
+  "isPrivacy": false // 是否开启隐私模式，检测到敏感信息会抹除，缺点是处理过程会变慢
+  "MUSIC_URL": "", // 一般不用改
+  "playListId": 0 // 填写你的网易云歌单id
+}
+```
 
 # 「手机」照片如何传输
 

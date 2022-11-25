@@ -3,7 +3,7 @@
  * @Date: 2022-11-11 21:11:42
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-17 11:11:29
+ * @LastEditTime: 2022-11-25 20:20:02
  * @site: book.palxp.com
  */
 const fs = require('fs')
@@ -16,8 +16,7 @@ const ColorThief = require('colorthief')
 
 const basePath = path.resolve('resources')
 const jsonPath = path.resolve('view/src/assets/data/datalist.json')
-const thumbSize = 600 // 缩略图质量
-const isPrivacy = false // 是否开启隐私模式，检测到敏感信息会抹除，缺点是处理过程会变慢
+const { thumbSize, isPrivacy } = require('./config.json')
 const picsData = []
 
 fs.readdir(basePath, async function (err, files) {
@@ -37,7 +36,7 @@ fs.readdir(basePath, async function (err, files) {
         // 生成压缩图
         images(filedir)
           .size(thumbSize)
-          .save(path.resolve(`view/public/thumb-${filename}`), { quality: 70 })
+          .save(path.resolve(`view/public/thumb-${filename}`), { quality: 75 })
       } catch (error) {}
       // 处理json数据
       let dimensions = { url: filename, datetime: dayjs(stats.birthtime).format('YYYY-MM-DD hh:mm:ss'), thumb: 'thumb-' + filename }
@@ -48,7 +47,7 @@ fs.readdir(basePath, async function (err, files) {
         dimensions = { ...dimensions, ...sizeOf(filedir) }
         if ([6, 8, 3].includes(dimensions.orientation) || dimensions.privacy) {
           // TODO：通过解码写入来复制图片，判断方向是否正确。
-          console.log('图片解码中...');
+          console.log('图片解码中...')
           images(filedir).save(path.resolve(`view/public/${filename}`))
         } else {
           cp(filedir, path.resolve(`view/public/${filename}`))
@@ -93,7 +92,7 @@ function exifGetInfo(filename) {
 // 获取日期详情
 function getDate(datetime) {
   const day = dayjs(datetime)
-  return { stamp: day.unix(), year: day.format('YYYY'), month: day.format('YYYY-MM'), date: day.format('YYYY-MM-DD') }
+  return { stamp: day.unix(), year: day.format('YYYY'), month: day.format('YYYY-MM'), date: day.format('YYYY-MM-DD'), dateStr: day.format('YYYY年MM月DD日') }
 }
 
 // 获取图片主颜色
@@ -132,7 +131,7 @@ function getExif(ExifImage) {
     Model && result.push({ name: '器材', value: Model })
     !isNaN(+FocalLength) && result.push({ name: '焦距', value: +FocalLength + 'mm' })
     const f = FNumber ? `F${FNumber}, ` : ''
-    const et = ExposureTime ? `${(+ExposureTime).toFixed(2)}s, ` : ''
+    const et = ExposureTime ? `1/${1 / +ExposureTime}s, ` : ''
     const iso = ISO ? `ISO${ISO}` : ''
     if (f || et || iso) {
       result.push({ name: '参数', value: f + et + iso })

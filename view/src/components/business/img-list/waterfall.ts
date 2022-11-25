@@ -3,7 +3,7 @@
  * @Date: 2022-11-13 17:34:04
  * @Description: 瀑布流排版
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-13 19:09:33
+ * @LastEditTime: 2022-11-23 15:42:06
  * @site: book.palxp.com
  */
 let columnNums = 2 // 有多少列
@@ -22,7 +22,7 @@ export default (state: any, data: any) => {
     item.h = item.height * ratio
     item.left = index * (pW / columnNums + gap)
     item.top = columnHeights[index] + gap || 0
-    // columnHeights[index] = isNaN(columnHeights[index]) ? item.height : item.height + columnHeights[index] + gap
+    // columnHeights[index] = isNaN(columnHeights[index]) ? item.h : item.h + columnHeights[index] + gap
     // TODO: 解决瘸腿问题
     if (isNaN(columnHeights[index])) {
       columnHeights[index] = item.h
