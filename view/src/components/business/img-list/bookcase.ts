@@ -3,7 +3,7 @@
  * @Date: 2022-11-13 17:34:04
  * @Description: 书架流排版
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-25 23:52:18
+ * @LastEditTime: 2022-11-26 20:05:03
  * @site: book.palxp.com
  */
 const gap = 8 // 图片之间的间隔
@@ -26,7 +26,7 @@ export default async (state: any, data: any) => {
 }
 
 async function createNewArr(list: any) {
-  const standardHeight = document.body.clientHeight/2.7 // 180 // 高度阈值
+  const standardHeight = document.body.clientHeight/2 // 180 // 高度阈值
   const neatArr: any = [] // 整理后的数组
   let count = 0
   function factory(cutArr: any) {
