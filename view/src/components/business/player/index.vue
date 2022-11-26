@@ -1,9 +1,9 @@
 <!--
  * @Author: ShawnPhang
  * @Date: 2022-11-18 18:09:51
- * @Description:  
+ * @Description: 音乐播放器
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-25 02:59:37
+ * @LastEditTime: 2022-11-26 11:13:26
  * @site: book.palxp.com
 -->
 <template>
@@ -40,7 +40,7 @@ export default defineComponent({
           autoplay: true,
           audio,
         })
-      }, 300)
+      }, 100)
     })
 
     async function load() {

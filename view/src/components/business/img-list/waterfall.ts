@@ -3,7 +3,7 @@
  * @Date: 2022-11-13 17:34:04
  * @Description: 瀑布流排版
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-23 15:42:06
+ * @LastEditTime: 2022-11-26 11:21:14
  * @site: book.palxp.com
  */
 let columnNums = 2 // 有多少列
@@ -12,6 +12,7 @@ const gap = 8 // 图片之间的间隔
 export default (state: any, data: any) => {
   const columnHeights: any = [] // 列的高度
   let { offsetWidth: pW } = state.listEl.parentNode
+  pW > 1000 && (columnNums =  3)
   pW -= gap * (columnNums - 1) // 总体宽度数值等于减去间隔
   const newList = JSON.parse(JSON.stringify(data))
   for (let i = 0; i < newList.length; i++) {

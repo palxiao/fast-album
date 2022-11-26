@@ -3,7 +3,7 @@
  * @Date: 2022-10-11 17:29:58
  * @Description: 预览
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-15 00:37:27
+ * @LastEditTime: 2022-11-26 11:14:10
  * @site: book.palxp.com
 -->
 <template>
@@ -22,7 +22,7 @@ import modal from '@/components/common/modal.vue'
 import { defineComponent, onMounted, nextTick, toRefs, reactive, watch } from 'vue'
 // import getExif from './getExif'
 import simulate from './simulate'
-import changeStyle from './changeStyle'
+// import changeStyle from './changeStyle'
 import loading from '@/components/common/loading.vue'
 
 export default defineComponent({
@@ -115,13 +115,6 @@ export default defineComponent({
       })
     })
 
-    // 线段中心点缩放
-    // function getCenter(a, b) {
-    //   const touchArr = Array.from(touches)
-    //   const start = touchArr[0][1]
-    //   const end = touchArr[1][1]
-    //   const { x, y } = { x: (start.offsetX + end.offsetX) / 2, y: (start.offsetY + end.offsetY) / 2 }
-    // }
     function setCenter(x = 0, y = 0) {
       const touchArr = Array.from(touches)
       if (touchArr.length === 2) {

@@ -3,7 +3,7 @@
  * @Date: 2022-11-11 21:11:42
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-25 20:20:02
+ * @LastEditTime: 2022-11-25 22:38:19
  * @site: book.palxp.com
  */
 const fs = require('fs')
@@ -131,7 +131,7 @@ function getExif(ExifImage) {
     Model && result.push({ name: '器材', value: Model })
     !isNaN(+FocalLength) && result.push({ name: '焦距', value: +FocalLength + 'mm' })
     const f = FNumber ? `F${FNumber}, ` : ''
-    const et = ExposureTime ? `1/${1 / +ExposureTime}s, ` : ''
+    const et = ExposureTime ? `1/${(1 / +ExposureTime).toFixed(0)}s, ` : ''
     const iso = ISO ? `ISO${ISO}` : ''
     if (f || et || iso) {
       result.push({ name: '参数', value: f + et + iso })
