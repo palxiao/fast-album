@@ -3,7 +3,7 @@
  * @Date: 2022-11-11 21:11:42
  * @Description:
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-25 22:38:19
+ * @LastEditTime: 2022-11-28 07:57:41
  * @site: book.palxp.com
  */
 const fs = require('fs')
@@ -55,7 +55,7 @@ fs.readdir(basePath, async function (err, files) {
       } catch (error) {}
       if (dimensions.width) {
         const color = await getColor(filename)
-        picsData.push({ ...dimensions, ...getDate(dimensions.datetime), color: rgbToHex(color) })
+        picsData.push({ ...dimensions, ...getDate(dimensions.datetime), color: rgbToHex(color), size: calculateSize(stats.size / 1024) })
       }
     }
   }
@@ -138,4 +138,9 @@ function getExif(ExifImage) {
     }
     resolve(result)
   })
+}
+
+// 计算大小
+function calculateSize(num) {
+  return num > 1024 ? (num / 1024).toFixed(2) + 'MB' : num.toFixed(1) + 'KB'
 }

@@ -3,7 +3,7 @@
  * @Date: 2022-10-11 17:29:58
  * @Description: 预览
  * @LastEditors: ShawnPhang
- * @LastEditTime: 2022-11-26 11:14:10
+ * @LastEditTime: 2022-11-28 08:01:24
  * @site: book.palxp.com
 -->
 <template>
@@ -13,6 +13,7 @@
       <div v-for="(d, di) in details" :key="'d' + di">{{ d.name }}: {{ d.value }}</div>
     </div>
     <loading v-show="isLoading" />
+    <div v-show="size" class="download"><span @click.stop="showRaw" class="btn">查看原图 ({{size}})</span></div>
   </modal>
   <!-- <div style="position: fixed; z-index: 9999999; color: #fff; top: 0; left: 0">{{ test }}</div> -->
 </template>
@@ -43,6 +44,7 @@ export default defineComponent({
       delay: `${isMobile ? 0 : 0.3}s`,
       details: [], // 照片信息
       isLoading: false,
+      size: 0
     })
 
     let initialData = { offset: {}, origin: 'center', scale: 1 }
@@ -153,7 +155,7 @@ export default defineComponent({
     let originalEl = null
 
     const open = async ({ e, imgData }) => {
-      state.isLoading = true
+      // state.isLoading = true
       reset()
       originalEl = e.target
       cloneEl = originalEl.cloneNode(true)
@@ -161,6 +163,7 @@ export default defineComponent({
       // 获取Exif信息(Exif改在node步骤保存)
       const imageExifDetail = imgData.exif || []
       state.details = imageExifDetail.concat([{ name: '摄于', value: originalEl.getAttribute('date') }])
+      state.size = imgData.size
 
       originalEl.style.opacity = 0
       cloneEl.style.width = '100%'
@@ -196,12 +199,7 @@ export default defineComponent({
               state.delay = '0s'
               state.offset = { left: offsetDistance.left - diffs.left, top: offsetDistance.top - diffs.top }
               state.style = { top: '0px', left: '0px', width: offsetWidth * ratio + 'px' }
-              // 动画结束，加载原图
-              simulate(originalEl.getAttribute('raw'), async () => {
-                await nextTick()
-                cloneEl.src = originalEl.getAttribute('raw')
-                state.isLoading = false
-              })
+              // 动画结束
               init()
             }, 300)
           },
@@ -209,6 +207,17 @@ export default defineComponent({
         )
         // scaleOrigin = {x: winWidth / 2, y: winHeight / 2}
       }, 10)
+    }
+
+    function showRaw() {
+      state.isLoading = true
+      // 动画结束，加载原图
+      simulate(originalEl.getAttribute('raw'), async () => {
+        await nextTick()
+        cloneEl.src = originalEl.getAttribute('raw')
+        state.isLoading = false
+        state.size = 0
+      })
     }
 
     function adaptScale() {
@@ -317,6 +326,7 @@ export default defineComponent({
       ...toRefs(state),
       open,
       tap,
+      showRaw,
     }
   },
 })
@@ -352,6 +362,19 @@ export default defineComponent({
     margin-bottom: 0.4rem;
     width: 50%;
     font-size: 12px;
+  }
+}
+.download {
+  position: fixed;
+  top: 14px;
+  width: 100%;
+  text-align: center;
+  .btn {
+    color: #ffffff;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 4px 6px;
+    border-radius: 4px;
   }
 }
 </style>
